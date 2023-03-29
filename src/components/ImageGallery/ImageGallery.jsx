@@ -2,6 +2,8 @@ import { getImage } from "components/services/getImage";
 import React, { Component } from "react";
 import Loader from "components/Loader/Loader";
 import AddImageBtn from "../Button/Button";
+import GalleryItem from "./imageGalleryItem";
+
 
 class ImageGallery extends Component{
     state = {
@@ -38,15 +40,11 @@ class ImageGallery extends Component{
         <>
             {this.state.error && <h1>{this.state.error}</h1>}       
             {this.state.loading && <Loader></Loader>}
-            {this.state.images && this.state.images.map(el => {
-            return (
-                    <ul className="gallery">
-                    <li  key={el.id} className="gallery-item">
-                    <img src={el.webformatURL} alt={el.tags} />
-                    </li>
-                    </ul>
-            )
-            })}
+                {this.state.images && <ul className="ImageGallery">{this.state.images.map(el => {
+                    return (
+                    <GalleryItem key={el.id} src={el.webformatURL} alt={el.tags} srcModal={el.largeImageURL}></GalleryItem>
+                    )
+                })}</ul>}
             {this.state.images.length > 0 ? <AddImageBtn onClick={this.handleLoadMore}></AddImageBtn> : null}
         </>
             
@@ -58,5 +56,9 @@ class ImageGallery extends Component{
 export default ImageGallery;
 
         ////
-    //    <li key={el.id}>{el.id}</li>     
+    //    <li key={el.id}>{el.id}</li>
     // { images:{hits:[...this.state.images.hits, images.hits ]} }
+    
+    // <li  key={el.id} className="gallery-item">
+                    // <img src={el.webformatURL} alt={el.tags} />
+                    // </li>

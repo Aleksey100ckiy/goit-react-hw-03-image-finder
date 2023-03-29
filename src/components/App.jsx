@@ -14,15 +14,7 @@ export class App extends Component {
 
   render() {
     console.log('state', this.state );
-    return(<div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
+    return(<div className="App"
     >
       <Searchbar onSearch={this.handleSubmit}></Searchbar>
       <ImageGallery value={this.state.textSearch} page={this.state.page}></ImageGallery>

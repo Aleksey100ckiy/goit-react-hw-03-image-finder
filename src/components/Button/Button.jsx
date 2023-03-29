@@ -1,8 +1,8 @@
 import React from "react";
 
-const AddImageBtn = (onClick) => {
+const AddImageBtn = ({ onClick }) => {
     return (
-        <button onClick={onClick} type="button">Load more</button>
+        <button onClick={onClick} type="Button">Load more</button>
     )
 }
 
