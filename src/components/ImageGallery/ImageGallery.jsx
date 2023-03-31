@@ -14,7 +14,22 @@ class ImageGallery extends Component{
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.value !== this.props.value || prevState.page !== this.state.page ) {
+        if (prevState.page !== this.state.page) {
+            this.setState({loading:true})
+            getImage(this.props.value.trim(), this.state.page)
+                .then((response) => response.json())
+                .then((images) => {
+                    this.setState({
+                        images:[...this.state.images, ...images.hits]
+                })
+            }).catch((error) => {
+                console.log('error >>', error)
+            }).finally(() => {
+                this.setState({loading:false})
+            })
+        }
+        if (prevProps.value !== this.props.value) {
+            this.handleEmptyState();
             this.setState({loading:true})
             getImage(this.props.value.trim(), this.state.page)
                 .then((response) => response.json())
@@ -33,7 +48,14 @@ class ImageGallery extends Component{
         this.setState((prevState) => ({
             page: prevState.page + 1,
         }))
-}
+    }
+    
+    handleEmptyState = () => {
+        this.setState({
+            images: [],
+            page: 1,
+        })
+    }
 
     render() {
         return (

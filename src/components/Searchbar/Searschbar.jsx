@@ -12,13 +12,14 @@ class Searchbar extends Component{
 
     handleSubmit = (e) => {
         e.preventDefault()
-        if (!this.state.value) {
-           return alert('Ваш запит пустий')
-        }
+      if (!this.state.value) {
+        return alert('Ваш запит пустий')
+      }
         this.props.onSearch(this.state.value)
-        this.setState({ value: ''})
+        this.setState({ value: '' })
+      
     }
-
+  
 
     render() {
         return (
