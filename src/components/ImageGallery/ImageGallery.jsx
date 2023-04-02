@@ -10,11 +10,12 @@ class ImageGallery extends Component{
         images: [],
         loading: false,
         page: 1,
-    
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.page !== this.state.page) {
+        
+        
+        if (prevState.page !== this.state.page && prevProps.value === this.props.value) {
             this.setState({loading:true})
             getImage(this.props.value.trim(), this.state.page)
                 .then((response) => response.json())
@@ -26,12 +27,12 @@ class ImageGallery extends Component{
                 console.log('error >>', error)
             }).finally(() => {
                 this.setState({loading:false})
-            })
+            }) 
         }
         if (prevProps.value !== this.props.value) {
             this.handleEmptyState();
             this.setState({loading:true})
-            getImage(this.props.value.trim(), this.state.page)
+            getImage(this.props.value.trim())
                 .then((response) => response.json())
                 .then((images) => {
                     this.setState({
@@ -43,6 +44,8 @@ class ImageGallery extends Component{
                 this.setState({loading:false})
             })
         }
+
+       
     }
     handleLoadMore = () => {
         this.setState((prevState) => ({
@@ -53,7 +56,7 @@ class ImageGallery extends Component{
     handleEmptyState = () => {
         this.setState({
             images: [],
-            page: 1,
+            page:1,
         })
     }
 
@@ -77,10 +80,25 @@ class ImageGallery extends Component{
 
 export default ImageGallery;
 
-        ////
-    //    <li key={el.id}>{el.id}</li>
-    // { images:{hits:[...this.state.images.hits, images.hits ]} }
+ 
     
     // <li  key={el.id} className="gallery-item">
                     // <img src={el.webformatURL} alt={el.tags} />
                     // </li>
+                    
+                    
+                    // if (prevProps.value !== this.props.value) {
+        //     this.handleEmptyState();
+        //     this.setState({loading:true})
+        //      return getImage(this.props.value.trim(), this.state.page, this.props.perPage)
+        //         .then((response) => response.json())
+        //         .then((images) => {
+        //             this.setState({
+        //                 images:[...this.state.images, ...images.hits]
+        //         })
+        //     }).catch((error) => {
+        //         console.log('error >>', error)
+        //     }).finally(() => {
+        //         this.setState({loading:false})
+        //     })
+        // }

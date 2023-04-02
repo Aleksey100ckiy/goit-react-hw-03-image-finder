@@ -6,6 +6,7 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 export class App extends Component {
   state = {
     textSearch: '',
+    
   }
  
   handleSubmit = (textSearch) => {
@@ -17,10 +18,11 @@ export class App extends Component {
     return(<div className="App"
     >
       <Searchbar onSearch={this.handleSubmit}></Searchbar>
-      <ImageGallery value={this.state.textSearch} page={this.state.page}></ImageGallery>
+      <ImageGallery value={this.state.textSearch} ></ImageGallery>
     </div>)
    
  }
 }
  
 
+// page={this.state.page} perPage={this.state.perPage}

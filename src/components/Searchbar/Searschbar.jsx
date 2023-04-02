@@ -3,7 +3,7 @@ import React, {Component} from "react";
 
 class Searchbar extends Component{
     state = {
-        value: '',
+      value: '',
     }
 
     handleChange = ({target:{value}}) => {
